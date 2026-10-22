@@ -5,11 +5,12 @@ INSERT INTO users (username, email, password_hash) VALUES
 ('daniel_admin', 'daniel@universidad.edu', SHA2('123456', 256)),
 ('usuario_prueba', 'prueba@universidad.edu', SHA2('123456', 256));
 
--- Insertar Categorías para el usuario 1
+-- Insertar Categorías
 INSERT INTO categories (name, id_user, is_default) VALUES 
 ('General', 1, TRUE),
 ('Universidad', 1, FALSE),
-('Personal', 1, FALSE);
+('Personal', 1, FALSE),
+('General', 2, TRUE);
 
 -- Insertar Tareas
 INSERT INTO tasks (title, description, status, due_date, id_category) VALUES 

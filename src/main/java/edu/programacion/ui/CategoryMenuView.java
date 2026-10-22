@@ -79,10 +79,14 @@ public class CategoryMenuView {
         listarCategorias(usuarioActual);
 
         int idCategoria = InputValidator.leerEntero(
-                "ID de la categoría que deseas editar: ", 1, 999999);
+                "ID de la categoría que deseas editar (0: cancelar): ", 0, 999999);
+        if (idCategoria == 0) {
+            System.out.println("Operación cancelada.");
+            return;
+        }
 
         String nuevoNombre = InputValidator.leerTextoNoVacio(
-                "Nuevo nombre: ");
+                "Nuevo nombre: ", 100);
 
         boolean actualizada = categoryDAO.actualizar(idCategoria, usuarioActual.getIdUser(), nuevoNombre);
 
@@ -102,10 +106,18 @@ public class CategoryMenuView {
         listarCategorias(usuarioActual);
 
         int idCategoria = InputValidator.leerEntero(
-                "ID de la categoría que deseas eliminar: ", 1, 999999);
+                "ID de la categoría que deseas eliminar (0: cancelar): ", 0, 999999);
+        if (idCategoria == 0) {
+            System.out.println("Operación cancelada.");
+            return;
+        }
 
-        boolean eliminada = categoryDAO.eliminar(idCategoria, usuarioActual.getIdUser()
-        );
+        if (!InputValidator.leerConfirmacion("¿Estás seguro de eliminar la categoría con ID " + idCategoria + "?")) {
+            System.out.println("Eliminación cancelada.");
+            return;
+        }
+
+        boolean eliminada = categoryDAO.eliminar(idCategoria, usuarioActual.getIdUser());
 
         if (eliminada) {
             System.out.println("Categoría eliminada correctamente.");
